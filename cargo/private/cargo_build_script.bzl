@@ -521,6 +521,7 @@ def _cargo_build_script_impl(ctx):
 
     for f in ctx.attr.crate_features:
         env["CARGO_FEATURE_" + f.upper().replace("-", "_")] = "1"
+    env["CARGO_CFG_FEATURE"] = ",".join(ctx.attr.crate_features)
 
     links = ctx.attr.links or ""
     if links:
