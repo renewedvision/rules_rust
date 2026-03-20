@@ -429,6 +429,11 @@ def _cargo_build_script_impl(ctx):
         "RUSTDOC": toolchain.rust_doc.path,
         "TARGET": toolchain.target_flag_value,
         # OUT_DIR is set by the runner itself, rather than on the action.
+        "CARGO_PKG_AUTHORS": "",
+        "CARGO_PKG_DESCRIPTION": "",
+        "CARGO_PKG_HOMEPAGE": "",
+        "CARGO_PKG_LICENSE": "",
+        "CARGO_PKG_REPOSITORY": "",
     })
 
     # This isn't exactly right, but Bazel doesn't have exact views of "debug" and "release", so...

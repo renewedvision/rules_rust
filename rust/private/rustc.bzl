@@ -154,6 +154,8 @@ def _get_rustc_env(attr, toolchain, crate_name):
         "CARGO_PKG_AUTHORS": "",
         "CARGO_PKG_DESCRIPTION": "",
         "CARGO_PKG_HOMEPAGE": "",
+        "CARGO_PKG_LICENSE": "",
+        "CARGO_PKG_REPOSITORY": "",
         "CARGO_PKG_NAME": attr.name,
         "CARGO_PKG_VERSION": version,
         "CARGO_PKG_VERSION_MAJOR": major,
