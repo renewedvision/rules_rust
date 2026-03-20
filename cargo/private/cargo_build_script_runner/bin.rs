@@ -33,8 +33,10 @@ fn run_buildrs() -> Result<(), String> {
     let exec_root = env::current_dir().expect("Failed to get current directory");
     let manifest_dir_env = env::var("CARGO_MANIFEST_DIR").expect("CARGO_MANIFEST_DIR was not set");
     let rustc_env = env::var("RUSTC").expect("RUSTC was not set");
+    let rustdoc_env = env::var("RUSTDOC").ok();
     let manifest_dir = exec_root.join(manifest_dir_env);
     let rustc = exec_root.join(&rustc_env);
+    let rustdoc = rustdoc_env.map(|env| exec_root.join(&env));
     let Args {
         progname,
         crate_links,
@@ -97,6 +99,9 @@ fn run_buildrs() -> Result<(), String> {
         .env("CARGO_MANIFEST_DIR", manifest_dir)
         .env("RUSTC", rustc)
         .env("RUST_BACKTRACE", "full");
+    if let Some(rustdoc) = rustdoc {
+        command.env("RUSTDOC", rustdoc);
+    }
 
     for dep_env_path in input_dep_env_paths.iter() {
         if let Ok(contents) = read_to_string(dep_env_path) {
